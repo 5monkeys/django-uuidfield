@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 import sys
 from django.conf import settings
 from optparse import OptionParser
@@ -22,7 +23,10 @@ if not settings.configured:
         DEBUG=False,
     )
 
-from django.test.simple import DjangoTestSuiteRunner
+try:
+    from django.test.runner import DiscoverRunner as Runner
+except ImportError:
+    from django.test.simple import DjangoTestSuiteRunner as Runner
 
 
 def runtests(*test_args, **kwargs):
@@ -35,7 +39,7 @@ def runtests(*test_args, **kwargs):
 
     kwargs.setdefault('interactive', False)
 
-    test_runner = DjangoTestSuiteRunner(**kwargs)
+    test_runner = Runner(**kwargs)
 
     failures = test_runner.run_tests(test_args)
     sys.exit(failures)
@@ -43,7 +47,7 @@ def runtests(*test_args, **kwargs):
 if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option('--verbosity', dest='verbosity', action='store', default=1, type=int)
-    parser.add_options(DjangoTestSuiteRunner.options)
+    parser.add_options(Runner.options)
     (options, args) = parser.parse_args()
 
     runtests(*args, **options.__dict__)

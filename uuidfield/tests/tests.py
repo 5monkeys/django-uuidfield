@@ -1,10 +1,10 @@
+# coding=utf-8
 import uuid
 
-from django.db import connection, IntegrityError
+from django.db import IntegrityError
 from django.test import TestCase
 
-from uuidfield.tests.models import (AutoUUIDField, ManualUUIDField,
-    NamespaceUUIDField, BrokenNamespaceUUIDField)
+from uuidfield.tests.models import AutoUUIDField, ManualUUIDField, NamespaceUUIDField, BrokenNamespaceUUIDField
 
 
 class UUIDFieldTestCase(TestCase):
@@ -35,4 +35,3 @@ class UUIDFieldTestCase(TestCase):
 
     def test_broken_namespace(self):
         self.assertRaises(ValueError, BrokenNamespaceUUIDField.objects.create)
-

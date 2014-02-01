@@ -1,2 +1,3 @@
-from .tests import *
-from .models import *
+# coding=utf-8
+# flake8: noqa
+from .tests import UUIDFieldTestCase
