@@ -26,10 +26,10 @@ matrix:
 
 install:
   - pip install --quiet --use-mirrors "Django>="$DJANGO",<"$DJANGO".99" flake8
-  - make install
   - if [ $DJANGO == "1.3" ]; then
     pip install --quiet --use-mirrors "psycopg2==2.4.1";
     fi
+  - make install
 
 before_script:
   - psql -c 'create database uuidfield_test;' -U postgres
