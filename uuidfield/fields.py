@@ -1,12 +1,13 @@
+# coding=utf-8
+import sys
 import uuid
 
 from django import forms
 from django.db.models import Field, SubfieldBase
 
-from django.utils.six import PY3
-
-if PY3:
+if sys.version_info[0] == 3:
     from django.utils.encoding import smart_text
+    unicode = str
 else:
     from django.utils.encoding import smart_unicode as smart_text
 
