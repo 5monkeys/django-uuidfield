@@ -62,12 +62,12 @@ class UUIDField(Field):
         if self.version == 1:
             args = (self.node, self.clock_seq)
         elif self.version in (3, 5):
-            error = None
+            error_attr = None
             if self.name is None:
                 error_attr = 'name'
             elif self.namespace is None:
                 error_attr = 'namespace'
-            if error is not None:
+            if error_attr is not None:
                 raise ValueError("The %s parameter of %s needs to be set." %
                                  (error_attr, self))
             if not isinstance(self.namespace, uuid.UUID):
